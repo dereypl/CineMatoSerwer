@@ -62,6 +62,24 @@ public class QueriesCntroller {
         return screenings;
     }
 
+    public static ArrayList<String> getSeatsReserved(Statement st,String screeningId) {
+        ArrayList<String> seatsReserved = new ArrayList<>();
+        ResultSet rs = executeQuery(st, "select seat_id from reservation where screening_id = "+screeningId+";");
+        while (true) {
+            try {
+                if (!rs.next()) break;
+
+                Seat seat = new Seat();
+                seat.setId(rs.getInt("seat_id"));
+
+                seatsReserved.add(Integer.toString(seat.getId()));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return seatsReserved;
+    }
+
     public static ArrayList<String> getAllSeats(Statement st) {
         ArrayList<String> seats = new ArrayList<>();
         ResultSet rs = executeQuery(st, "Select * from seat;");

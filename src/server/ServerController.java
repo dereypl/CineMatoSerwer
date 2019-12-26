@@ -70,6 +70,13 @@ public class ServerController {
                             objectOutputStream.writeObject(new Message("MovieScreeningsList", screenings));
                             break;
                         }
+                        case "getSeatsReserved": {
+                            System.out.println("getSeatsReserved");
+                            System.out.println(request.getBody().get(0));
+                            ArrayList<String> seatsReserved = QueriesCntroller.getSeatsReserved(st,request.getBody().get(0));
+                            objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
+                            break;
+                        }
                     }
                 }
 
