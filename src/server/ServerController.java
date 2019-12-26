@@ -41,21 +41,33 @@ public class ServerController {
                 ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
-                boolean terminate = false;
+                boolean should = false;
                 Message request;
 
-                while (!terminate) {
+                while (!should) {
                     request = (Message) objectInputStream.readObject();
 
                     switch (request.getType()) {
                         case "terminate": {
                             objectOutputStream.writeObject(new Message("Terminated", new ArrayList<>()));
-                            terminate = true;
+                            should = true;
                             break;
                         }
                         case "getMovieList": {
                             ArrayList<String> movies = QueriesCntroller.getAllMovies(st);
-                            objectOutputStream.writeObject(new Message("movieList", movies));
+                            objectOutputStream.writeObject(new Message("moviesList", movies));
+                            break;
+                        }
+                        case "getSeatsList": {
+                            ArrayList<String> seats = QueriesCntroller.getAllSeats(st);
+                            objectOutputStream.writeObject(new Message("seatsList", seats));
+                            break;
+                        }
+                        case "getMovieScreenings": {
+                            System.out.println("getMovieScreenings");
+                            System.out.println(request.getBody().get(0));
+                            ArrayList<String> screenings = QueriesCntroller.getMovieScreenings(st,request.getBody().get(0));
+                            objectOutputStream.writeObject(new Message("MovieScreeningsList", screenings));
                             break;
                         }
                     }
