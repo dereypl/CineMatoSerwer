@@ -59,7 +59,9 @@ public class ServerController {
                             break;
                         }
                         case "getSeatsList": {
-                            ArrayList<String> seats = QueriesCntroller.getAllSeats(st);
+                            System.out.println("getSeatsList");
+                            System.out.println(request.getBody().get(0));
+                            ArrayList<String> seats = QueriesCntroller.getAllSeats(st,request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsList", seats));
                             break;
                         }
@@ -75,6 +77,24 @@ public class ServerController {
                             System.out.println(request.getBody().get(0));
                             ArrayList<String> seatsReserved = QueriesCntroller.getSeatsReserved(st,request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
+                            break;
+                        }
+                        case "reservationRequest": {
+                            System.out.println("reservationRequest Handled!!");
+                            System.out.println("Movie id" + request.getBody().get(0));
+                            System.out.println("screening id" + request.getBody().get(1));
+                            System.out.println("seat id" + request.getBody().get(2));
+                            System.out.println("Firstname" + request.getBody().get(3));
+                            System.out.println("LastName" + request.getBody().get(4));
+                            System.out.println("Email" + request.getBody().get(5));
+                            System.out.println("CardNumber" + request.getBody().get(6));
+                            System.out.println("cvv" + request.getBody().get(7));
+                            System.out.println("month" + request.getBody().get(8));
+                            System.out.println("year" + request.getBody().get(9));
+
+//                            System.out.println(request.getBody().get(0));
+//                            ArrayList<String> seatsReserved = QueriesCntroller.getSeatsReserved(st,request.getBody().get(0));
+//                            objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
                             break;
                         }
                     }

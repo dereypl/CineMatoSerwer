@@ -80,9 +80,9 @@ public class QueriesCntroller {
         return seatsReserved;
     }
 
-    public static ArrayList<String> getAllSeats(Statement st) {
+    public static ArrayList<String> getAllSeats(Statement st,String screeningId) {
         ArrayList<String> seats = new ArrayList<>();
-        ResultSet rs = executeQuery(st, "Select * from seat;");
+        ResultSet rs = executeQuery(st, "Select * from seat where screening_id = "+screeningId+";");
         while (true) {
             try {
                 if (!rs.next()) break;
