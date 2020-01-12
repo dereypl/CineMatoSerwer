@@ -1,11 +1,8 @@
-import models.Movie;
-import database.QueriesCntroller;
 import server.ServerController;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.List;
 
 import static database.DatabaseController.*;
 
@@ -53,7 +50,7 @@ public class Main {
 
 
 //        // --- GET ALL MOVIES ---
-//        List<Movie> movies = QueriesCntroller.getAllMovies(st);
+//        List<Movie> movies = QueriesController.getAllMovies(st);
 //
 //        for (Movie m : movies) {
 //            System.out.println(m.toString());

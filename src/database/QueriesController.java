@@ -6,13 +6,14 @@ import models.Seat;
 
 import static database.DatabaseController.executeQuery;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueriesCntroller {
+public class QueriesController {
 
     //TODO: refactor as singleton ??
 
@@ -41,9 +42,9 @@ public class QueriesCntroller {
         return movies;
     }
 
-    public static ArrayList<String> getMovieScreenings(Statement st,String movieId) {
+    public static ArrayList<String> getMovieScreenings(Statement st, String movieId) {
         ArrayList<String> screenings = new ArrayList<>();
-        ResultSet rs = executeQuery(st, "select * from screening where movie_id ="+movieId+";");
+        ResultSet rs = executeQuery(st, "select * from screening where movie_id =" + movieId + ";");
         while (true) {
             try {
                 if (!rs.next()) break;
@@ -62,9 +63,9 @@ public class QueriesCntroller {
         return screenings;
     }
 
-    public static ArrayList<String> getSeatsReserved(Statement st,String screeningId) {
+    public static ArrayList<String> getSeatsReserved(Statement st, String screeningId) {
         ArrayList<String> seatsReserved = new ArrayList<>();
-        ResultSet rs = executeQuery(st, "select seat_id from reservation where screening_id = "+screeningId+";");
+        ResultSet rs = executeQuery(st, "select seat_id from reservation where screening_id = " + screeningId + ";");
         while (true) {
             try {
                 if (!rs.next()) break;
@@ -80,9 +81,9 @@ public class QueriesCntroller {
         return seatsReserved;
     }
 
-    public static ArrayList<String> getAllSeats(Statement st,String screeningId) {
+    public static ArrayList<String> getAllSeats(Statement st, String screeningId) {
         ArrayList<String> seats = new ArrayList<>();
-        ResultSet rs = executeQuery(st, "Select * from seat where screening_id = "+screeningId+";");
+        ResultSet rs = executeQuery(st, "Select * from seat where screening_id = " + screeningId + ";");
         while (true) {
             try {
                 if (!rs.next()) break;
@@ -98,5 +99,19 @@ public class QueriesCntroller {
             }
         }
         return seats;
+    }
+
+    public static int reserveSeat(Statement st, Integer screeningId, Integer seatId) {
+
+        String sql = String.format("INSERT INTO reservation " +
+                "(screening_id, seat_id, customer_name, customer_surname, customer_email, customer_card_cvv, customer_card_number, customer_card_exp_month, customer_card_exp_year, status)" +
+                " VALUES" + "('%s', '%s', 'Testowy', 'Tetete', 'test@betorniara.ll', '098', '4929327295477365', '03', '2006', 'confirmed');", screeningId, seatId);
+        try {
+            System.out.println("st:" + st.executeUpdate(sql));
+            return st.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

@@ -2,10 +2,11 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
 
-import database.QueriesCntroller;
+import database.QueriesController;
 import main.java.Cinemato.connection.Message;
 
 public class ServerController {
@@ -54,28 +55,28 @@ public class ServerController {
                             break;
                         }
                         case "getMovieList": {
-                            ArrayList<String> movies = QueriesCntroller.getAllMovies(st);
+                            ArrayList<String> movies = QueriesController.getAllMovies(st);
                             objectOutputStream.writeObject(new Message("moviesList", movies));
                             break;
                         }
                         case "getSeatsList": {
                             System.out.println("getSeatsList");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> seats = QueriesCntroller.getAllSeats(st,request.getBody().get(0));
+                            ArrayList<String> seats = QueriesController.getAllSeats(st,request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsList", seats));
                             break;
                         }
                         case "getMovieScreenings": {
                             System.out.println("getMovieScreenings");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> screenings = QueriesCntroller.getMovieScreenings(st,request.getBody().get(0));
+                            ArrayList<String> screenings = QueriesController.getMovieScreenings(st,request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("MovieScreeningsList", screenings));
                             break;
                         }
                         case "getSeatsReserved": {
                             System.out.println("getSeatsReserved");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> seatsReserved = QueriesCntroller.getSeatsReserved(st,request.getBody().get(0));
+                            ArrayList<String> seatsReserved = QueriesController.getSeatsReserved(st,request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
                             break;
                         }
@@ -92,9 +93,10 @@ public class ServerController {
                             System.out.println("month" + request.getBody().get(8));
                             System.out.println("year" + request.getBody().get(9));
 
-//                            System.out.println(request.getBody().get(0));
-//                            ArrayList<String> seatsReserved = QueriesCntroller.getSeatsReserved(st,request.getBody().get(0));
-//                            objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
+                            String response = ReservationController.seatReservation(st,Integer.parseInt(request.getBody().get(1)),Integer.parseInt(request.getBody().get(2)));
+                            ArrayList<String> responseForEverySeat = new ArrayList<>();
+                            responseForEverySeat.add(response);
+                            objectOutputStream.writeObject(new Message(response,responseForEverySeat));
                             break;
                         }
                     }
@@ -105,7 +107,7 @@ public class ServerController {
                 objectOutputStream.close();
                 clientSocket.close();
 
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }
