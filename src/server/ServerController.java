@@ -62,41 +62,40 @@ public class ServerController {
                         case "getSeatsList": {
                             System.out.println("getSeatsList");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> seats = QueriesController.getAllSeats(st,request.getBody().get(0));
+                            ArrayList<String> seats = QueriesController.getAllSeats(st, request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsList", seats));
                             break;
                         }
                         case "getMovieScreenings": {
                             System.out.println("getMovieScreenings");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> screenings = QueriesController.getMovieScreenings(st,request.getBody().get(0));
+                            ArrayList<String> screenings = QueriesController.getMovieScreenings(st, request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("MovieScreeningsList", screenings));
                             break;
                         }
                         case "getSeatsReserved": {
                             System.out.println("getSeatsReserved");
                             System.out.println(request.getBody().get(0));
-                            ArrayList<String> seatsReserved = QueriesController.getSeatsReserved(st,request.getBody().get(0));
+                            ArrayList<String> seatsReserved = QueriesController.getSeatsReserved(st, request.getBody().get(0));
                             objectOutputStream.writeObject(new Message("seatsReserved", seatsReserved));
                             break;
                         }
                         case "reservationRequest": {
-                            System.out.println("reservationRequest Handled!!");
-                            System.out.println("Movie id" + request.getBody().get(0));
-                            System.out.println("screening id" + request.getBody().get(1));
-                            System.out.println("seat id" + request.getBody().get(2));
-                            System.out.println("Firstname" + request.getBody().get(3));
-                            System.out.println("LastName" + request.getBody().get(4));
-                            System.out.println("Email" + request.getBody().get(5));
-                            System.out.println("CardNumber" + request.getBody().get(6));
-                            System.out.println("cvv" + request.getBody().get(7));
-                            System.out.println("month" + request.getBody().get(8));
-                            System.out.println("year" + request.getBody().get(9));
+                            System.out.println("reservationRequest Handled: movie: "+ request.getBody().get(0) + " screening: " + request.getBody().get(1) + "seat: "+ request.getBody().get(2));
+                            Integer screeningId = Integer.parseInt(request.getBody().get(1));
+                            Integer seatId = Integer.parseInt(request.getBody().get(2));
+                            String firstName = request.getBody().get(3);
+                            String LastName = request.getBody().get(4);
+                            String Email = request.getBody().get(5);
+                            String CardNumber = request.getBody().get(6);
+                            String cvv = request.getBody().get(7);
+                            String month = request.getBody().get(8);
+                            String year = request.getBody().get(9);
 
-                            String response = ReservationController.seatReservation(st,Integer.parseInt(request.getBody().get(1)),Integer.parseInt(request.getBody().get(2)));
+                            String response = ReservationController.seatReservation(st, screeningId, seatId, firstName, LastName, Email, CardNumber, cvv, month, year);
                             ArrayList<String> responseForEverySeat = new ArrayList<>();
                             responseForEverySeat.add(response);
-                            objectOutputStream.writeObject(new Message(response,responseForEverySeat));
+                            objectOutputStream.writeObject(new Message(response, responseForEverySeat));
                             break;
                         }
                     }

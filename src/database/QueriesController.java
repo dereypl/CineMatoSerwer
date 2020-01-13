@@ -33,6 +33,7 @@ public class QueriesController {
                 movie.setDuration_min(rs.getInt("duration_min"));
                 movie.setYear(rs.getString("year"));
                 movie.setRating(rs.getString("rating"));
+                movie.setPosterLink(rs.getString("poster_link"));
 
                 movies.add(movie.toString());
             } catch (SQLException e) {
@@ -101,13 +102,13 @@ public class QueriesController {
         return seats;
     }
 
-    public static int reserveSeat(Statement st, Integer screeningId, Integer seatId) {
+    public static int reserveSeat(Statement st, Integer screeningId, Integer seatId, String firstName, String surname, String email,String cardNumber,String cardCvv, String cardExpMonth, String cardExpYear) {
 
         String sql = String.format("INSERT INTO reservation " +
                 "(screening_id, seat_id, customer_name, customer_surname, customer_email, customer_card_cvv, customer_card_number, customer_card_exp_month, customer_card_exp_year, status)" +
-                " VALUES" + "('%s', '%s', 'Testowy', 'Tetete', 'test@betorniara.ll', '098', '4929327295477365', '03', '2006', 'confirmed');", screeningId, seatId);
+                " VALUES" + "('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', 'confirmed');",
+                screeningId, seatId, firstName, surname, email,cardNumber,cardCvv, cardExpMonth, cardExpYear);
         try {
-            System.out.println("st:" + st.executeUpdate(sql));
             return st.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();

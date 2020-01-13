@@ -10,9 +10,9 @@ public class Movie {
     private String Year;
     private String Rating;
     private int Duration_min;
+    private String PosterLink;
 
-
-//    public Movie(String title, String director, String genre, String description, String year, String rating, int duration_min) {
+//    public Movie(String title, String director, String genre, String description, String year, String rating, int duration_min,String poster_link) {
 //
 //        Title = title;
 //        Director = director;
@@ -21,6 +21,7 @@ public class Movie {
 //        Year = year;
 //        Rating = rating;
 //        Duration_min = duration_min;
+//        PosterLink = poster_link;
 //    }
 
 
@@ -52,6 +53,10 @@ public class Movie {
         return Duration_min;
     }
 
+    public String getPosterLink() {
+        return PosterLink;
+    }
+
     public void setTitle(String title) {
         Title = title;
     }
@@ -80,6 +85,11 @@ public class Movie {
         Duration_min = duration_min;
     }
 
+    public void setPosterLink(String posterLink) {
+        this.PosterLink = posterLink;
+    }
+
+
     public int getId() {
         return Id;
     }
@@ -89,7 +99,7 @@ public class Movie {
     }
 
     public String toString() {
-        return Id + "&" + Title + "&" + Director + "&" + Genre + "&" + Description + "&" + Year + "&" + Rating + "&" + Duration_min;
+        return Id + "&" + Title + "&" + Director + "&" + Genre + "&" + Description + "&" + Year + "&" + Rating + "&" + Duration_min + "&" + PosterLink;
     }
 
 

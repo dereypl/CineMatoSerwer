@@ -11,14 +11,14 @@ import static database.DatabaseController.executeQuery;
 
 public class ReservationController {
 
-    public static String seatReservation(Statement st, Integer screeningId, Integer seatId) throws SQLException {
+    public static String seatReservation(Statement st, Integer screeningId, Integer seatId, String firstName, String surname, String email,String cardNumber ,String cardCvv, String cardExpMonth, String cardExpYear) throws SQLException {
 
-        synchronized (seatId) { //TODO: why synchronized on id.. should be on reservation_id
+        synchronized (seatId) {
             try {
                 if (isSeatAvailable(st, screeningId, seatId)) {
-                    int affectedRows = QueriesController.reserveSeat(st, screeningId, seatId);
+                    int affectedRows = QueriesController.reserveSeat(st, screeningId, seatId,firstName, surname, email,cardNumber,cardCvv, cardExpMonth, cardExpYear);
                     System.out.println(affectedRows);
-                    Thread.sleep(10000);
+                    Thread.sleep(6000);
                     if (affectedRows != 0) return "reserved";
                     else return "failed";
                 }

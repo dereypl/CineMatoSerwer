@@ -37,8 +37,9 @@ public class Main {
         }
 
         // --- CREATE TABLE ... ---
+        //TODO: make init data and drop database if exists
 //        if (executeUpdate(st,
-//                "CREATE TABLE ksiazki_ ( id INT NOT NULL, tytul VARCHAR(50) NOT NULL, autor INT NOT NULL, PRIMARY KEY (id) );") == 0)
+//                "CREATE TABLE movie ( id INT NOT NULL, tytul VARCHAR(50) NOT NULL, autor INT NOT NULL, PRIMARY KEY (id) );") == 0)
 //            System.out.println("Tabela utworzona");
 //        else
 //            System.out.println("Tabela nie utworzona!");
@@ -48,13 +49,6 @@ public class Main {
 //        String sql = "Select * from Movie;";
 //        printDataFromQuery(executeQuery(st, sql));
 
-
-//        // --- GET ALL MOVIES ---
-//        List<Movie> movies = QueriesController.getAllMovies(st);
-//
-//        for (Movie m : movies) {
-//            System.out.println(m.toString());
-//        }
 
         ServerController server = new ServerController();
         try {
