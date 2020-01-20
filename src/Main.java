@@ -23,6 +23,18 @@ public class Main {
         Statement st = createStatement(con);
 
 
+        // --- DROP DATABASE---
+        try {
+//            st.executeUpdate("DROP TABLE IF EXISTS reservation");
+//            st.executeUpdate("DROP TABLE IF EXISTS screening");
+//            st.executeUpdate("DROP TABLE IF EXISTS seat");
+//            st.executeUpdate("DROP TABLE IF EXISTS movie");
+              st.executeUpdate("DROP DATABASE cinemato");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // --- CHOOSE DATABASE ---
         if (executeUpdate(st, "USE cinemato;") == 0)
             System.out.println("Baza wybrana");
@@ -37,17 +49,6 @@ public class Main {
             else
                 System.out.println("Baza niewybrana!");
         }
-
-        // --- DROP DATABASE---
-        try {
-            st.executeUpdate("DROP TABLE IF EXISTS movie");
-            st.executeUpdate("DROP TABLE IF EXISTS reservation");
-            st.executeUpdate("DROP TABLE IF EXISTS screening");
-            st.executeUpdate("DROP TABLE IF EXISTS seat");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
 
         // --- CREATE DATABASE---
 
