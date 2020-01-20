@@ -42,16 +42,16 @@ public class ServerController {
                 ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
-                boolean should = false;
+                boolean terminate = false;
                 Message request;
 
-                while (!should) {
+                while (!terminate) {
                     request = (Message) objectInputStream.readObject();
 
                     switch (request.getType()) {
                         case "terminate": {
                             objectOutputStream.writeObject(new Message("Terminated", new ArrayList<>()));
-                            should = true;
+                            terminate = true;
                             break;
                         }
                         case "getMovieList": {

@@ -15,8 +15,6 @@ import java.util.List;
 
 public class QueriesController {
 
-    //TODO: refactor as singleton ??
-
     public static ArrayList<String> getAllMovies(Statement st) {
         ArrayList<String> movies = new ArrayList<>();
         ResultSet rs = executeQuery(st, "Select * from Movie;");
