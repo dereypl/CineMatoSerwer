@@ -2,8 +2,6 @@ import server.ServerController;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import static database.DatabaseController.*;
@@ -25,6 +23,7 @@ public class Main {
         // --- INITIALIZE DATABASE ---
         dbInit(st);
 
+        // --- RUN SERVER ---
         ServerController server = new ServerController();
         try {
             server.start(8808, st);
@@ -35,8 +34,5 @@ public class Main {
 
         // --- CLOSE CONNECTION ---
         closeConnection(con, st);
-    }
-
-    private static void dropDatabase() {
     }
 }
