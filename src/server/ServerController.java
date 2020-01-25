@@ -27,8 +27,6 @@ public class ServerController {
 
     private static class ClientHandler extends Thread {
         private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
         private Statement st;
 
         public ClientHandler(Socket socket, Statement st) {
