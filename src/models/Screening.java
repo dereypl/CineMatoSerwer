@@ -10,12 +10,6 @@ public class Screening {
     private Date Date;
     private Time StartTime;
 
-//    public Screening(int id, int movieId, java.sql.Date date, Time startTime) {
-//        Id = id;
-//        MovieId = movieId;
-//        Date = date;
-//        StartTime = startTime;
-//    }
 
     public int getId() {
         return Id;

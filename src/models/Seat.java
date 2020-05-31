@@ -25,11 +25,6 @@ public class Seat {
 
     private int Reservation_id;
 
-//    public Seat(int id, String row, int number) {
-//        Id = id;
-//        Row = row;
-//        Number = number;
-//    }
 
     public int getId() {
         return Id;

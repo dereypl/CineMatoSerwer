@@ -12,18 +12,6 @@ public class Movie {
     private int Duration_min;
     private String PosterLink;
 
-//    public Movie(String title, String director, String genre, String description, String year, String rating, int duration_min,String poster_link) {
-//
-//        Title = title;
-//        Director = director;
-//        Genre = genre;
-//        Description = description;
-//        Year = year;
-//        Rating = rating;
-//        Duration_min = duration_min;
-//        PosterLink = poster_link;
-//    }
-
 
     public String getTitle() {
         return Title;
